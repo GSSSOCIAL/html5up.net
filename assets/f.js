@@ -1,41 +1,49 @@
-$(document).ready(function(){
-    $(document).on("click","ul.nav>li",function(e){
-        if($(e.target).closest("li").find(">ul").length>0){
-            $(e.target).closest("li").toggleClass("active");
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector("ul.nav").addEventListener("click",function(e){
+        var target = e.target;
+        var is_sub = target.classList.contains("submenu");
+        while(is_sub==false){
+            var target = target.parentNode;
+            if(typeof target.classList == "undefined"){
+                return;
+            }
+            is_sub = target.classList.contains("submenu");
         }
+        target.classList.toggle("active");
     });
-    $(document).on("click","div.page a.togglemenu",function(e){
+    document.querySelector("a.togglemenu").addEventListener("click",function(e){
         e.preventDefault();
-        var target = $(e.target).closest("div.page");
-        if(target.hasClass("menu-hidden")){
-            target.removeClass("menu-hidden-hide-components");
+        var target = e.target;
+        while(target.classList.contains("page")==false){
+            target = target.parentNode;
+        }
+        if(target.classList.contains("menu-hidden")){
+            target.classList.remove("menu-hidden-hide-components");
             setTimeout(function(t){
-                t.removeClass("menu-hidden");
+                t.classList.remove("menu-hidden");
             },50,target);
         }else{
-            target.addClass("menu-hidden");
+            target.classList.add("menu-hidden");
             setTimeout(function(t){
-                t.addClass("menu-hidden-hide-components");
+                t.classList.add("menu-hidden-hide-components");
             },300,target);
         }
         return false;
     });
-    $(window).on("scroll",function(e){
-        if( $("body div.page").hasClass("menu-hidden")) return;
-        var y  = window.scrollY+window.innerHeight,
-        h = $("body div.page aside>div.inner").outerHeight(true);
-        if((h-y)<=0){
-            $("body div.page aside>div.inner").css({
-                width:($("body div.page aside>div.inner").width())+"px",
-                position:"fixed",
-                bottom:"0"
-            });
+    document.addEventListener("scroll",function(e){
+        if(document.body.getElementsByClassName("page")[0].classList.contains("menu-hidden")){
+            return;
+        }
+        var Y = window.scrollY+window.innerHeight,
+        H = document.getElementById("aside_inner").getBoundingClientRect().height;
+        if((H-Y)<=0){
+            document.getElementById("aside_inner").style.width = document.getElementById("aside_inner").getBoundingClientRect().width+"px";
+            document.getElementById("aside_inner").style.position = "fixed";
+            document.getElementById("aside_inner").style.bottom = "0px";
         }else{
-            $("body div.page aside>div.inner").css({
-                width:"",
-                position:"",
-                bottom:"0"
-            });
+            document.getElementById("aside_inner").style.width = "";
+            document.getElementById("aside_inner").style.position = "";
+            document.getElementById("aside_inner").style.bottom = "";
         }
     });
 });

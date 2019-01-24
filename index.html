@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto+Slab:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     
-    <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="assets/f.js"></script>
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -15,7 +14,7 @@
     <div class="page">
         <aside>
             <a href="#" class="togglemenu"><i class="fas fa-bars"></i></a>
-            <div class="inner">
+            <div class="inner" id="aside_inner">
                 <form method="POST" class="search inset">
                     <input type="text" name="s" value="" placeholder="Search" />
                     <i class="fa fa-search icon"></i>
@@ -23,7 +22,7 @@
                 <div class="block inset">
                     <span class="block-title">Menu</span>
                     <div class="block-content">
-                        <ul class="nav">
+                        <ul class="nav" id="nav">
                             <li><a href="#">HOMEPAGE</a></li>
                             <li><a href="#">GENERIC</a></li>
                             <li><a href="#">ELEMENTS</a></li>
